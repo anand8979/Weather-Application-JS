@@ -61,9 +61,12 @@ async function checkWeather(city) {
         document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
 
         // Change weather icon based on conditions
-        if (data.weather[0].main == "Clouds") {
-            weatherIcon.src = "images/Cloud day.png";
-        } else if (data.weather[0].main == "Clear") {
+        if (data.weather[0].main == "Clouds" && hours >= 6 && hours <= 18) {
+            weatherIcon.src = "imgs/cloudday.png";
+        }else if (data.weather[0].main == "Clouds" && hours < 6 && hours >18) {
+            weatherIcon.src = "imgs/cloudnight.png";
+        }
+         else if (data.weather[0].main == "Clear") {
             weatherIcon.src = "images/clear.png";
         } else if (data.weather[0].main == "Rain") {
             weatherIcon.src = "images/rain.png";
