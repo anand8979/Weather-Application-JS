@@ -59,6 +59,9 @@ async function checkWeather(city) {
         document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
         document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
         document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
+        // Calculate local time using timezone
+        const currentTime = new Date((data.dt + data.timezone) * 1000);
+        const hours = currentTime.getUTCHours();
 
         // Change weather icon based on conditions
         if (data.weather[0].main == "Clouds" && hours >= 6 && hours <= 18) {
@@ -76,9 +79,7 @@ async function checkWeather(city) {
             weatherIcon.src = "images/mist.png";
         }
 
-        // Calculate local time using timezone
-        const currentTime = new Date((data.dt + data.timezone) * 1000);
-        const hours = currentTime.getUTCHours();
+        
 
         // Apply day/night effect
         if (hours >= 6 && hours <= 18) {
